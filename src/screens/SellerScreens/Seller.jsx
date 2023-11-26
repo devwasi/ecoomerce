@@ -21,8 +21,8 @@ const navigate = useNavigate()
             onChildAdded(dbRefUser,data=>{
               // if user is seller then show their data else navigate to buyerpage
              if(data.val().userType === "Seller"){
+               setProducts([])
               const dbRef = ref(DATABASE, `products/`)
-              setProducts([])
               onChildAdded(dbRef,data=>setProducts(prev=>[...prev,data.val()]))
             }else{
               navigate("/buyer")
@@ -35,18 +35,16 @@ const navigate = useNavigate()
           }
         });
       },[])
-  return (<>
+      return (<>
           <Button onClick={()=>navigate("/addProducts")}>add Product</Button>
           <Button onClick={()=>signOut(Auth)}>Sign Out</Button>
     <Box display={"flex"} justifyContent={"space-between"} flexDirection={"row"} flexWrap={"wrap"} gap={2}>
-      <Stack>
         {
           products.length ? 
           products.filter((e,i)=>e.uid === isUser.uid ).map((e,i)=><Card key={i} title={e.title} description={e.desc} price={e.price} image={e.productImg}/>)
           :"no data"
             
         }
-        </Stack>
     </Box>
     </>
   )
