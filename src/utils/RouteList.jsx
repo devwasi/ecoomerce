@@ -1,12 +1,9 @@
-import About from "../screens/About";
+import AddToCart from "../screens/BuyerScreens/AddToCart";
 import Buyer from "../screens/BuyerScreens/Buyer";
-import DashboardScreen from "../screens/DashboardScreen";
 import ErrorRoute from "../screens/ErrorRoute";
-import Home from "../screens/Home";
 import Login from "../screens/Login";
 import ProductDetail from "../screens/ProductDetail";
 import Products from "../screens/Products";
-import SearchBar from "../screens/SearchBar";
 import Seller from "../screens/SellerScreens/Seller";
 import SignUp from "../screens/SignUp";
 import UploadProducts from "../screens/UploadProducts";
@@ -14,32 +11,13 @@ import UploadProducts from "../screens/UploadProducts";
 export const RouteList = [
   {
     path: "/",
-    element: <Home />,
-    name: "Home"
-  },
-  {
-    path: "/about",
-    element: <About />,
-    name: "ABout"
-  },
-  {
-    path: "/product-details/:productId", // id is param
-    element: <ProductDetail />,
-  },
-  {
-    path: "/dashboard/*",
-    element: <DashboardScreen />,
-    name: "Dashboard"
+    element: <Login />,
+    name: "Login"
   },
   {
     path: "/signup",
     element: <SignUp />,
     name: "Signup"
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    name: "Login"
   },
   {
     path: "/addProducts",
@@ -56,9 +34,22 @@ export const RouteList = [
     element: <Seller />,
     name: "Seller"
   },
- 
+  {
+    path: "/addtocart",
+    element: <AddToCart />,
+    name: "cart"
+  },
+  {
+    name: "Products",
+    path: "/products",
+    element: <Products />,
+  },
   {
     path: "*",
     element: <ErrorRoute />,
+  },
+  {
+    path: "/product-details/:productId", // id is param
+    element: <ProductDetail />,
   },
 ];

@@ -28,7 +28,7 @@ const SignUp = () => {
 
       const obj = {
         email: authData.email,
-          userType: authData.userType,
+          userType: authData.userType || "Buyer",
           id: userData.user.uid
     }
 // set user data to db
@@ -36,10 +36,9 @@ const SignUp = () => {
    set(refrenceDB,obj)
 // navigate to login on suuccess
       navigate('/login')
-      console.log(userData.user);
     } catch (err) {
       console.log(err);
-      setSignupError(err.code.slice(5));
+      setSignupError(err.code);
       setIsLoading(false);
     }
   };

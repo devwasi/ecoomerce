@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import "./card.css";
 
-function Card({ title,catagory, image, description, rating, price, i, star, onClick, height }) {
+function Card({ title,catagory, image, description, rating, price, i, star, onClick, height, addToCart }) {
   const descrip = description.slice(0, 130);
 
   return (
@@ -30,7 +30,7 @@ function Card({ title,catagory, image, description, rating, price, i, star, onCl
         </div>
         } 
       <div className="btnMainRating">
-        <button className="btn">Cart | ${price}</button>
+        <button className="btn" onClick={addToCart}>Cart | ${price}</button>
         <button className="btn">
           {rating} <img src={star} width={15} alt="star" />
         </button>

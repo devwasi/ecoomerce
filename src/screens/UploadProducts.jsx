@@ -12,28 +12,23 @@ const [isUser, setIsUser] = useState({})
 const [previewImg, setPreviewImg] = useState("")
 const navigate = useNavigate()
 
-const chechUser = ()=>{
+const checkUser = ()=>{
   onAuthStateChanged(Auth, (user) => {
     if (user) {
-      const isUser = user;
       setIsUser(user)
-      console.log(user)
-      // ...
     } else {
-      // setUser(false)
       navigate("/login")
     }
   });
 }
 
 useEffect(()=>{
-  chechUser()
+  checkUser()
 },[])
 
 const dataHandler = (e) => {
   setProductData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
 };
-console.log(isUser)
 function writeUserData() {
  
       const obj = {
@@ -41,6 +36,7 @@ function writeUserData() {
           desc: productData.desc,
           price : productData.price,
     }
+
 
     const keyRef = ref(DATABASE);
     const key = push(keyRef).key;
@@ -54,8 +50,8 @@ function writeUserData() {
 
           // console.log("image ur =>", imageURL);
           obj.productImg = imageURL
-          
-          const refrenceDB = ref(DATABASE, `products/${isUser.uid}/${obj.id}`)
+          obj.uid = isUser.uid
+          const refrenceDB = ref(DATABASE, `products/${obj.id}`)
           set(refrenceDB,obj)
         console.log("products added")
 
@@ -75,10 +71,18 @@ function writeUserData() {
       e && setPreviewImg(localImgURL)
       }
 
+      // const inputFields = [
+      //   {placeholder: "Product title", id: "title", type: "text" ,onChange:{dataHandler}},
+      //   {placeholder: "Product desc", id: "desc", type: "text" ,onChange:{dataHandler}},
+      //   {placeholder: "Product price", id: "price", type: "text" ,onChange:{dataHandler}},
+      //   {placeholder: "Product image", id: "image", type: "file", onChange:{showImg}}
+      // ]
   return (
     
     <Stack>
-      
+      {/* {
+        inputFields.map((e,i)=><TextField placeholder={e.placeholder} id={e.id} type={e.type} onChange={onchange} />)
+      } */}
         <TextField placeholder='Product title' onChange={dataHandler} id='title' />
         <TextField placeholder='Product desc' onChange={dataHandler} id='desc' />
         <TextField placeholder='Product price' onChange={dataHandler} id='price' />

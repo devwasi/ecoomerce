@@ -36,6 +36,14 @@ function Products() {
   const filterHandler = (e, newValue) => {
     newValue === "clear" ? setFilter("") : setFilter(newValue);
   };
+
+  const addToCart = (e)=>{
+    console.log("running",e)
+    // const cart =
+     localStorage.setItem("user",JSON.stringify(e))
+     const a = localStorage.getItem("user")
+     console.log(JSON.parse(a))
+  }
   
   return (
     <div className="main">
@@ -64,6 +72,7 @@ function Products() {
                 key={i}
                 star={star}
                 onClick={() => navigate("/product-details/" + (i + 1))}
+                addToCart={()=>addToCart(e)}
               />
             );
           })
@@ -82,6 +91,8 @@ function Products() {
               key={i}
               star={star}
               onClick={() => navigate("/product-details/" + (i + 1))}
+              addToCart={()=>addToCart(e)}
+
             />
           );
         })

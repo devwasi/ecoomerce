@@ -14,11 +14,7 @@ export const DashboardRouteList = [
     path: "notifications",
     element: <Notifications />,
   },
-  // {
-  //   name: "Products",
-  //   path: "products",
-  //   element: <Products />,
-  // },
+ 
   
   {
     name: "Products",

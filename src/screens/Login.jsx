@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, {  useState } from "react";
 import { Auth, DATABASE } from "../config/firebase/FirebaseConfig";
 import { useNavigate } from "react-router-dom";
-import {  onValue, ref } from "firebase/database";
+import {  onChildAdded, ref } from "firebase/database";
 
 const Login = () => {
   const [authData, setAuthData] = useState({});
@@ -17,7 +17,6 @@ const Login = () => {
 
   const submitDataHandler = async () => {
     setIsLoading(true);
-    console.log("submit", authData);
     try {
       const userData = await signInWithEmailAndPassword(
         Auth,
@@ -25,8 +24,10 @@ const Login = () => {
         authData.password
       );
       // get data from database by uid
-      const dbRef = ref(DATABASE, `user/${userData.user.uid}/userData`)
-      onValue(dbRef,(data)=>{
+      console.log(userData.user.uid)
+      const dbRef = ref(DATABASE, `user/${userData.user.uid}`)
+      onChildAdded(dbRef,(data)=>{
+        console.log(data.val())
         data.val().userType === "Seller" ? navigate("/seller") : navigate("/buyer")
       });
 
